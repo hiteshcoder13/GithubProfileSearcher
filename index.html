@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            text-align: center;
+            background-color: rgba(255, 200, 0, 0.356);
+            margin-top: 30px;
+            margin-left: 400px;
+            margin-right: 400px;
+            height: 600px;
+            border: 2px solid black;
+            border-radius: 10%;
+        }
+        #search,#btn{
+            font-size: xx-large;
+          background-color: rgb(216, 244, 124);
+        }
+        img{
+            height: 240px;
+            width: 280px;
+            display: none;
+            padding-left: 200px;
+
+        }
+        p{
+            font-size: xx-large;
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Github Profile Searcher</h1>
+        <input type="text" id="search" placeholder="Enter Github Username">
+        <button id="btn">Search</button>
+        <div id="result">
+            <p id="name"></p>
+            <img src="" id="img">
+            <p id="bio"></p>
+        </div>
+    </div>
+    <script>
+         let btn = document.getElementById("btn");
+       
+            async function x(){
+              
+        let search = document.getElementById("search");
+        let result = document.getElementById("result");
+        let name = document.getElementById("name");
+        let img = document.getElementById("img");
+        let bio = document.getElementById("bio");
+            let url = "https://api.github.com/users/"+search.value
+            img.style.display = "block";
+let response = await fetch(url);
+let data = await response.json();
+            name.innerHTML = data.name;
+            img.src = data.avatar_url;
+            bio.innerHTML = data.bio;
+    
+    }
+    btn.addEventListener("click",()=>{
+           x();
+        });
+    </script>
+</body>
+</html>
